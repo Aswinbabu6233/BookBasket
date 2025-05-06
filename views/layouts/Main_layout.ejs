@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BookBasket</title>
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <!-- font awesom -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    />
+  </head>
+  <body>
+    <header>
+      <div class="logo">
+        <a href="/"><img src="/images/BookBasket logo.png" alt="" /></a>
+      </div>
+      <nav>
+        <ul class="nav-links">
+          <% if (adminpresent) { %>
+          <li><a href="/admin/dashboard">Dashboard</a></li>
+          <li><a href="/admin/add-book">Add Book</a></li>
+          <li><a href="/admin/manage-books">Manage</a></li>
+          <li><a href="/admin/orders">Orders</a></li>
+          <li><a href="/Logout">Logout</a></li>
+
+          <% } else if (userpresent) { %>
+          <li><a href="/">Home</a></li>
+          <li><a href="/cart">My Cart</a></li>
+          <li><a href="/orders">My Orders</a></li>
+          <li><a href="/profile">Profile</a></li>
+          <li><a href="/Logout">Logout</a></li>
+
+          <% } else { %>
+          <li><a href="/">Home</a></li>
+          <li><a href="/Login">Login</a></li>
+          <li><a href="/Signup">Register</a></li>
+          <% } %>
+        </ul>
+      </nav>
+    </header>
+    <%- body %>
+
+    <script src="/javascripts/script.js"></script>
+  </body>
+</html>

@@ -1,0 +1,88 @@
+<div class="signup-container">
+  <h2>Create Your Account</h2>
+  <%if (errors && errors.length >0) {%>
+  <ul class="error-messages">
+    <% errors.forEach(function(error) {%>
+    <li><%= error.msg %></li>
+    <% })%>
+  </ul>
+  <%} %>
+  <form action="/signup" method="POST">
+    <div>
+      <label for="name">Full Name:</label>
+      <input
+        type="text"
+        name="name"
+        id="name"
+        required
+        placeholder="John Doe"
+      />
+    </div>
+    <div>
+      <label for="phoneNumber">Phone Number:</label>
+      <input
+        type="text"
+        name="phoneNumber"
+        id="phoneNumber"
+        required
+        placeholder="9876543210"
+      />
+    </div>
+
+    <div>
+      <label for="address">Address:</label>
+      <textarea
+        name="address"
+        id="address"
+        rows="3"
+        required
+        placeholder="House name, City Name, State Name, contry Name"
+      ></textarea>
+    </div>
+    <div>
+      <label for="zipCode">Zip Code:</label>
+      <input
+        type="text"
+        name="zipCode"
+        id="zipCode"
+        required
+        placeholder="e.g. 688561"
+      />
+    </div>
+    <div>
+      <label for="email">Email Address:</label>
+      <input
+        type="email"
+        name="email"
+        id="email"
+        required
+        placeholder="you@example.com"
+      />
+    </div>
+    <div>
+      <label for="password">Password:</label>
+      <input
+        type="password"
+        name="password"
+        id="password"
+        required
+        placeholder="Create a Strong Password"
+      />
+    </div>
+    <div>
+      <label for="confirmPassword">Confirm Password:</label>
+      <input
+        type="password"
+        name="confirmPassword"
+        id="confirmPassword"
+        required
+        placeholder="Re-enter your Password"
+      />
+    </div>
+    <div>
+      <button type="submit">Sign Up</button>
+    </div>
+  </form>
+
+  <p>Already have an account? <a href="/login">Log In</a></p>
+</div>

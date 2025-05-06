@@ -1,0 +1,175 @@
+<div class="dashboard-container">
+  <div class="dashboard-top">
+    <h4>
+      Welcome back!
+      <span> <%= Admin.name %> </span>
+    </h4>
+    <p>Here is a summary of your bookstore's performance.</p>
+  </div>
+
+  <div class="summary-cards">
+    <div class="card1">
+      <h2><span> 📚 </span> Total Books</h2>
+      <p>
+        <% if (books && books.length > 0) { %> <%= books.length %> <% } else {
+        %> 0 <% } %>
+      </p>
+    </div>
+    <div class="card2">
+      <h2><span> 👥 </span> Total Registered Users</h2>
+      <p>
+        <% if (users && users.length > 0) { %> <%= users.length %> <% } else {
+        %> 0 <% } %>
+      </p>
+    </div>
+    <div class="card3">
+      <h2><span> 🛒 </span> Total Orders</h2>
+      <p>300</p>
+    </div>
+
+    <div class="card4">
+      <h2><span> 💰 </span> Total Revenue</h2>
+      <p>₹ 1,50,000</p>
+    </div>
+    <div class="card5">
+      <h2><span> 🔻 </span> Low Stock Books</h2>
+      <p>
+        <% if(lowstockBooks && lowstockBooks.length > 0) {%> <%=
+        lowstockBooks.length%> <% } else {%> 0 <% }%>
+      </p>
+    </div>
+    <div class="card6">
+      <h2><span> 📦 </span> Pending Orders</h2>
+      <p>10</p>
+    </div>
+    <!-- out of stock -->
+    <div class="card7">
+      <h2><span> ❌ </span> Out of Stock Books</h2>
+      <p>
+        <% if (outofstockBooks && outofstockBooks.length > 0) { %> <%=
+        outofstockBooks.length %> <% } else { %> 0 <% } %>
+      </p>
+    </div>
+  </div>
+
+  <!-- total books -->
+  <div class="total-bookanduser-table">
+    <h2>Total books</h2>
+    <% if (books && books.length > 0) { %>
+    <table>
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Author</th>
+          <th>Genre</th>
+          <th>Price</th>
+          <th>Stock</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% books.forEach(function(book) { %>
+        <tr>
+          <td><%= book.title %></td>
+          <td><%= book.author %></td>
+          <td><%= book.genre %></td>
+          <td>₹<%= book.price.toFixed(2) %></td>
+          <td><%= book.quantity > 0 ? book.quantity : 'Out of Stock' %></td>
+        </tr>
+        <% }); %>
+      </tbody>
+    </table>
+    <% } else { %>
+    <p>No books available to display.</p>
+    <% } %>
+  </div>
+
+  <div class="total-bookanduser-table">
+    <h2>Total Users</h2>
+    <% if (users && users.length > 0) { %>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Phone</th>
+          <th>Address</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% users.forEach(function(user) { %>
+        <tr>
+          <td><%= user.name %></td>
+          <td><%= user.email %></td>
+          <td><%= user.phoneNumber %></td>
+          <td><%= user.address %></td>
+        </tr>
+        <% }); %>
+      </tbody>
+    </table>
+    <% } else { %>
+    <p>No users available to display.</p>
+    <% } %>
+  </div>
+
+  <!-- lowstock-book-table -->
+  <div class="lowstock-book-table">
+    <% if (lowstockBooks && lowstockBooks.length > 0) { %>
+    <h2>Low Stock Books</h2>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Author</th>
+          <th>Genre</th>
+          <th>Price</th>
+          <th>Stock</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% lowstockBooks.forEach(function(book) { %>
+        <tr>
+          <td><%= book.title %></td>
+          <td><%= book.author %></td>
+          <td><%= book.genre %></td>
+          <td>₹<%= book.price.toFixed(2) %></td>
+          <td><%= book.quantity > 0 ? book.quantity : 'Out of Stock' %></td>
+        </tr>
+        <% }); %>
+      </tbody>
+    </table>
+    <% } else { %>
+    <p>No low stock books available to display.</p>
+    <% } %>
+  </div>
+
+  <!-- out of stock -->
+  <div class="outofstock-book-table">
+    <% if (outofstockBooks && outofstockBooks.length > 0) { %>
+    <h2>Out of Stock Books</h2>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Author</th>
+          <th>Genre</th>
+          <th>Price</th>
+          <th>Stock</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% outofstockBooks.forEach(function(book) { %>
+        <tr>
+          <td><%= book.title %></td>
+          <td><%= book.author %></td>
+          <td><%= book.genre %></td>
+          <td>₹<%= book.price.toFixed(2) %></td>
+          <td><%= book.quantity > 0 ? book.quantity : 'Out of Stock' %></td>
+        </tr>
+        <% }); %>
+      </tbody>
+    </table>
+    <% } %>
+  </div>
+</div>

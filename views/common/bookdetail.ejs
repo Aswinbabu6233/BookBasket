@@ -1,0 +1,99 @@
+<div class="main-container">
+  <div class="back">
+    <a href="/">Back to Home</a>
+  </div>
+  <div class="book-detail-card">
+    <div class="book-img-button">
+      <img
+        src="data:<%= book.image.contentType %>;base64,<%= book.image.data.toString('base64') %>"
+        alt="<%= book.title %>"
+      />
+      <div class="action-buttons">
+        <% if(book.quantity > 0) {%>
+        <button class="btn add-to-cart" data-id="<%= book._id %>">
+          Add to Basket
+        </button>
+        <button class="btn buy-now" data-id="<%= book._id %>">Buy Now</button>
+        <% } else {%>
+        <h5 class="out-of-stock">Out of Stock</h5>
+        <%}%>
+      </div>
+    </div>
+    <div class="book-info">
+      <h1 class="book-title"><%= book.title %></h1>
+      <p class="book-genre"><span>Genre :</span> <%= book.genre %></p>
+      <div class="balance-info">
+        <p class="book-author"><span>Author :</span> <%= book.author %></p>
+        <p class="book-description">
+          <span>About this Book: </span><%= book.description%>
+        </p>
+        <div class="delivery-info">
+          <% if (user && user.address) { %>
+          <div class="available-delivery">
+            <span class="delivery"
+              >Delivery: <span class="address"><%= user.address %></span>
+            </span>
+            <div class="delivery-status">
+              <span>
+                <i class="fas fa-check-circle"></i> Delivery available
+              </span>
+              <span>
+                <i class="fas fa-calendar-alt"></i> Estimated delivery: 3-5 days
+              </span>
+            </div>
+            <span class="delivery-date">
+              <i class="fas fa-clock"></i>
+              Around within <%= new Date(Date.now() + 4 * 24 * 60 * 60 *
+              1000).toLocaleDateString() %>
+            </span>
+          </div>
+          <% } else { %>
+          <span class="login-prompt delivery"
+            >Delivery:
+            <a href="/Login">
+              <i class="fas fa-exclamation-circle"></i> Please login to check
+            </a>
+          </span>
+          <% } %>
+        </div>
+        <div class="book-price">
+          <p class="special-price">Special Price</p>
+          <div class="price">
+            <h4 class="discounted-price">₹<%= book.price.toFixed(2) %></h4>
+            <h4 class="original-price">
+              <s>₹<%= fakeOriginalPrice %></s>
+            </h4>
+            <h5 class="discount-tag">(<%= discountPercent %>% off)</h5>
+          </div>
+        </div>
+        <h5 class="other-details">Other Details</h5>
+        <div class="book-details-list">
+          <div class="detail-item">
+            <p><strong>Publisher:</strong> <%= book.publisher %></p>
+          </div>
+          <div class="detail-item">
+            <p>
+              <strong>Published:</strong> <%= new
+              Date(book.publisher_date).toLocaleDateString() %>
+            </p>
+          </div>
+          <div class="detail-item">
+            <p><strong>Language:</strong> <%= book.language %></p>
+          </div>
+          <div class="detail-item">
+            <p><strong>ISBN-13:</strong> <%= book.isbn_13 %></p>
+          </div>
+          <div class="detail-item">
+            <p><strong>Pages:</strong> <%= book.pages %></p>
+          </div>
+          <div class="detail-item">
+            <p><strong>Binding:</strong> <%= book.binding %></p>
+          </div>
+          <div class="detail-item">
+            <p><strong>Weight:</strong> <%= book.weight %></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

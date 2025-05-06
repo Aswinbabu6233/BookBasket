@@ -1,0 +1,49 @@
+<div class="form-container">
+  <h2>Add a New Book</h2>
+
+  <% if (errors && errors.length > 0) { %>
+  <ul class="error-messages">
+    <% errors.forEach(function(error) { %>
+    <li><%= error.msg %></li>
+    <% }) %>
+  </ul>
+  <% } %>
+
+  <form action="/admin/add-book" method="POST" enctype="multipart/form-data">
+    <input type="text" name="title" placeholder="Book Title" required />
+    <input type="text" name="author" placeholder="Author" required />
+    <input type="text" name="genre" placeholder="Genre" required />
+    <input
+      type="number"
+      name="price"
+      placeholder="Price"
+      step="0.01"
+      required
+    />
+    <input type="number" name="quantity" placeholder="Quantity" required />
+    <textarea
+      name="description"
+      placeholder="Book Description"
+      required
+    ></textarea>
+
+    <input
+      type="text"
+      name="language"
+      placeholder="Language (default: English)"
+    />
+    <input type="text" name="isbn_13" placeholder="ISBN-13" />
+    <input type="text" name="isbn_10" placeholder="ISBN-10" />
+    <input type="text" name="publisher" placeholder="Publisher" />
+    <input type="date" name="publisher_date" placeholder="Publish Date" />
+    <input type="text" name="binding" placeholder="Binding (e.g., Paperback)" />
+    <input type="text" name="edition" placeholder="Edition (e.g., Reprint)" />
+    <input type="text" name="weight" placeholder="Weight (e.g., 200gr)" />
+    <input type="number" name="pages" placeholder="Pages" />
+
+    <label>Upload Book Image:</label>
+    <input type="file" name="image" accept="image/*" required />
+
+    <button type="submit">Add Book</button>
+  </form>
+</div>

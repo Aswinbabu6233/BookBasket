@@ -1,0 +1,86 @@
+<div class="main-container">
+  <h3 class="edit-book-title">
+    <span class="Book-title"> <%= book.title %> </span> :
+    <span class="Book-author"> <%= book.author %> </span>
+  </h3>
+  <div class="edit-form">
+    <img
+      src="data:<%= book.image.contentType %>;base64,<%= book.image.data.toString('base64') %>"
+      alt="Cover of <%= book.title %> by <%= book.author %>"
+      loading="lazy"
+    />
+    <form
+      method="POST"
+      action="/admin/edit-book/<%= book._id %>"
+      enctype="multipart/form-data"
+    >
+      <div class="edit-form-group">
+        <label for="title">Title</label>
+        <input
+          type="text"
+          name="title"
+          id="title"
+          value="<%= book.title %>"
+          required
+        />
+      </div>
+
+      <div class="edit-form-group">
+        <label for="author">Author</label>
+        <input
+          type="text"
+          name="author"
+          id="author"
+          value="<%= book.author %>"
+          required
+        />
+      </div>
+
+      <div class="edit-form-group">
+        <label for="genre">Genre</label>
+        <input
+          type="text"
+          name="genre"
+          id="genre"
+          value="<%= book.genre %>"
+          required
+        />
+      </div>
+
+      <div class="edit-form-group">
+        <label for="price">Price</label>
+        <input
+          type="number"
+          name="price"
+          id="price"
+          value="<%= book.price %>"
+          required
+        />
+      </div>
+
+      <div class="edit-form-group">
+        <label for="quantity">Quantity</label>
+        <input
+          type="number"
+          name="quantity"
+          id="quantity"
+          value="<%= book.quantity %>"
+          required
+        />
+      </div>
+
+      <div class="edit-form-group">
+        <label for="image">Image</label>
+        <input
+          type="file"
+          name="image"
+          id="image"
+          accept=".jpg, .jpeg, .png, .gif, .webp, .bmp, .tiff, .svg+xml, .ico, .jfif, .pjpeg, .pjp, .avif, .heic, .heif, .raw, .indd, .eps, .ai, .pdf"
+          required
+        />
+      </div>
+
+      <button type="submit">Update Book</button>
+    </form>
+  </div>
+</div>

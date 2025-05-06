@@ -1,0 +1,78 @@
+<% if (book) { %>
+<div>
+  <div class="random-container">
+    <div class="random-details">
+      <h1><%= book.title %></h1>
+      <h4><%= book.author %></h4>
+      <p>
+        <%= book.description.substring(0, 200) %>
+        <span><a href="#">...See more</a></span>
+      </p>
+      <h5>Genre: <span><%= book.genre %></span></h5>
+      <h5>Price: <span>₹<%= book.price.toFixed(2) %></span></h5>
+      <div class="buttons">
+        <a class="add-to-cart" href="/">Add to Bucket</a>
+        <a class="buy-now" href="/">Buy Now</a>
+      </div>
+    </div>
+    <div class="random-image">
+      <img
+        src="data:<%= book.image.contentType %>;base64,<%= book.image.data.toString('base64') %>"
+        alt="<%= book.title %>"
+      />
+    </div>
+  </div>
+  <!-- All Book Cards -->
+  <div class="all-book-header" id="all-book-header">
+    <h1>All Books</h1>
+    <p>Explore our collection of books</p>
+    <div class="all-book-buttons">
+      <% if (genres && genres.length > 0) { %> <% genres.forEach(function(g) {
+      %>
+      <button><%= g %></button>
+
+      <% }); %> <% } else { %>
+      <p>No genres available.</p>
+      <% } %>
+    </div>
+  </div>
+
+  <div class="all-book-container">
+    <% if (books && books.length > 0) { %> <% books.forEach(function(b) { %>
+    <div class="book-card" data-id="<%= b._id %>">
+      <img
+        src="data:<%= b.image.contentType %>;base64,<%= b.image.data.toString('base64') %>"
+        alt="Cover of <%= b.title %> by <%= b.author %>"
+        loading="lazy"
+      />
+      <p class="title"><%= b.title %></p>
+      <p class="genre"><%= b.genre %></p>
+      <p class="author"><%= b.author %></p>
+      <p class="stock-status">
+        <% if (b.quantity > 0) { %>
+        <span class="in-stock">In Stock</span>
+        <% } else { %>
+        <span class="out-of-stock">Out of Stock</span>
+        <% } %>
+      </p>
+      <div class="card-row">
+        <p class="book-price">₹<%= b.price.toFixed(2) %></p>
+
+        <% if (b.quantity > 0) { %>
+        <button class="add-to-bucket" data-id="<%= b._id %>">
+          Add to Basket
+        </button>
+        <% } else { %>
+        <h5>Out of Stock</h5>
+        <% } %>
+      </div>
+    </div>
+    <% }); %> <% } else { %>
+    <p>No more books to display.</p>
+    <% } %>
+  </div>
+</div>
+
+<% } else { %>
+<p>No books available to display.</p>
+<% } %>

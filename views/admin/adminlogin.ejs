@@ -1,0 +1,36 @@
+<div class="login-container">
+  <h2>Admin Login</h2>
+  <%if (errors && errors.length >0) {%>
+  <ul class="error-messages">
+    <% errors.forEach(function(error) {%>
+    <li><%= error.msg %></li>
+    <% })%>
+  </ul>
+  <%} %>
+  <form action="/admin/login" method="post">
+    <div>
+      <label for="email">Email Address:</label>
+      <input
+        type="email"
+        name="email"
+        id="email"
+        required
+        placeholder="Enter your email"
+      />
+    </div>
+    <div>
+      <label for="password">Password:</label>
+      <input
+        type="password"
+        name="password"
+        id="password"
+        required
+        placeholder="Enter your password"
+      />
+    </div>
+    <div>
+      <button type="submit">Login</button>
+    </div>
+  </form>
+  <p>Don't have an account? <a href="/signup">Sign Up</a></p>
+</div>
