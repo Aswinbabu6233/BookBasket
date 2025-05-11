@@ -46,6 +46,35 @@ header {
   width: auto;
 }
 
+.search-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.search-bar input {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+  width: 400px;
+}
+.search-bar button {
+  padding: 10px 15px;
+  background-color: #0217fe;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s ease;
+}
+.search-bar button:hover {
+  background-color: #0312c5;
+}
+.search-bar button:focus {
+  outline: none;
+}
+
 nav ul {
   display: flex;
   align-items: center;
@@ -341,6 +370,18 @@ nav ul li a:hover::after {
   color: #555;
   margin-bottom: 20px;
 }
+.genre-name {
+  text-transform: capitalize;
+}
+.book-count {
+  margin-left: 20px;
+  font-size: 14px;
+  color: #444;
+  font-weight: 500;
+  display: inline-block;
+  padding: 4px 8px;
+  border-radius: 20px;
+}
 
 /* Filter Buttons */
 .all-book-buttons {
@@ -359,6 +400,7 @@ nav ul li a:hover::after {
   border-radius: 20px;
   cursor: pointer;
   font-size: 14px;
+  text-transform: capitalize;
   transition: background-color 0.2s ease;
 }
 
@@ -395,8 +437,8 @@ nav ul li a:hover::after {
 
 /* Book Image */
 .book-card img {
-  width: auto;
   height: 220px;
+  width: auto;
   object-fit: cover;
   align-self: center;
   border-radius: 8px;
@@ -649,6 +691,25 @@ nav ul li a:hover::after {
   color: #6c757d;
   font-weight: 500;
 }
+
+/* error img */
+.error-img {
+  width: 100vw;
+  height: 75vh;
+  background-color: inherit;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.error-img img {
+  width: 350px;
+  height: auto;
+  align-items: center;
+  border-radius: 10px;
+}
+
+/* profile */
+
 /* dashboard */
 
 .dashboard-container {

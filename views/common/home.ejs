@@ -1,12 +1,13 @@
 <% if (book) { %>
 <div>
+  <!-- Featured Random Book -->
   <div class="random-container">
     <div class="random-details">
       <h1><%= book.title %></h1>
       <h4><%= book.author %></h4>
       <p>
         <%= book.description.substring(0, 200) %>
-        <span><a href="#">...See more</a></span>
+        <span><a href="/book/<%= book._id %>">...See more</a></span>
       </p>
       <h5>Genre: <span><%= book.genre %></span></h5>
       <h5>Price: <span>₹<%= book.price.toFixed(2) %></span></h5>
@@ -22,21 +23,43 @@
       />
     </div>
   </div>
-  <!-- All Book Cards -->
+
+  <!-- Genre Filter Buttons -->
   <div class="all-book-header" id="all-book-header">
-    <h1>All Books</h1>
-    <p>Explore our collection of books</p>
+    <h1>Explore our collection of books</h1>
+    <p>
+      <span>Filter by Genre:</span>
+      <span class="genre-name"
+        ><%= selectedGenre === "All" ? "All" : selectedGenre %></span
+      >
+    </p>
+
     <div class="all-book-buttons">
+      <a href="/?genre=All">
+        <button class="<%= selectedGenre === 'All' ? 'active' : '' %>">
+          All
+        </button>
+      </a>
+
       <% if (genres && genres.length > 0) { %> <% genres.forEach(function(g) {
       %>
-      <button><%= g %></button>
-
+      <a href="/?genre=<%= g %>">
+        <button class="<%= selectedGenre === g ? 'active' : '' %>">
+          <%= g %>
+        </button>
+      </a>
       <% }); %> <% } else { %>
       <p>No genres available.</p>
       <% } %>
     </div>
   </div>
 
+  <!-- bookcount -->
+  <h4 class="genre-name book-count">
+    <%= selectedGenre === "All" ? "All Books" : `${selectedGenre} Books` %>
+    <span> (<%= books ? books.length : 0 %>) </span>
+  </h4>
+  <!-- Book Cards -->
   <div class="all-book-container">
     <% if (books && books.length > 0) { %> <% books.forEach(function(b) { %>
     <div class="book-card" data-id="<%= b._id %>">
@@ -68,11 +91,10 @@
       </div>
     </div>
     <% }); %> <% } else { %>
-    <p>No more books to display.</p>
+    <p>No books available in this genre.</p>
     <% } %>
   </div>
 </div>
-
 <% } else { %>
 <p>No books available to display.</p>
 <% } %>

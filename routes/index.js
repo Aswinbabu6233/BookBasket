@@ -7,26 +7,58 @@ const { isAuthenticated } = require("../Middleware/authentication");
 
 /* GET home page. */
 const Book = require("../models/bookmodel");
-
 router.get("/", async (req, res) => {
   try {
-    const count = await Book.countDocuments();
-    const random = Math.floor(Math.random() * count);
-    const randomBook = await Book.findOne().skip(random);
-    const books = await Book.find({});
+    const genreFilter = req.query.genre;
     const genres = await Book.distinct("genre");
+    const count = await Book.countDocuments();
+    const randomBook = await Book.findOne().skip(
+      Math.floor(Math.random() * count)
+    );
+
+    let books;
+    if (genreFilter && genreFilter !== "All") {
+      books = await Book.find({ genre: genreFilter });
+    } else {
+      books = await Book.find({});
+    }
 
     res.render("common/home", {
       book: randomBook,
-      books: books,
-      genres: genres,
+      books,
+      genres,
+      selectedGenre: genreFilter || "All",
       userpresent: req.session.user,
       adminpresent: req.session.user && req.session.user.role === "admin",
     });
   } catch (err) {
-    console.error("Error fetching random book:", err);
+    console.error("Error:", err);
     res.render("common/home", { book: null });
   }
+});
+
+// search
+
+router.get("/search", async (req, res) => {
+  const searchTerm = req.query.query || "";
+
+  const query = {
+    $or: [
+      { title: { $regex: searchTerm, $options: "i" } },
+      { genre: { $regex: searchTerm, $options: "i" } },
+      { author: { $regex: searchTerm, $options: "i" } },
+    ],
+  };
+
+  const books = await Book.find(query);
+
+  res.render("common/search", {
+    books,
+
+    userpresent: req.session.user,
+    adminpresent: req.session.user?.role === "admin",
+    query: searchTerm,
+  });
 });
 
 router.get("/Login", function (req, res, next) {

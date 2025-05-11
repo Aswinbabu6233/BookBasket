@@ -16,6 +16,21 @@
       <div class="logo">
         <a href="/"><img src="/images/BookBasket logo.png" alt="" /></a>
       </div>
+      <!-- search don;t show if admin logged in -->
+      <% if(!adminpresent){%>
+      <div class="search-bar">
+        <form action="/search" method="GET">
+          <input
+            type="text"
+            name="query"
+            placeholder="Search for books..."
+            required
+          />
+          <button type="submit"><i class="fas fa-search"></i></button>
+        </form>
+      </div>
+      <% }%>
+
       <nav>
         <ul class="nav-links">
           <% if (adminpresent) { %>

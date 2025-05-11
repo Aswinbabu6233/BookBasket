@@ -1,0 +1,38 @@
+<div class="main-search">
+  <div class="all-book-container">
+    <% if (books.length === 0) { %>
+    <div class="error-img">
+      <img src="/images/nobookfound.png" alt="No books found" />
+    </div>
+    <% } else { %> <% books.forEach(book => { %>
+    <div class="book-card" data-id="<%= book._id %>">
+      <img
+        src="data:<%= book.image.contentType %>;base64,<%= book.image.data.toString('base64') %>"
+        alt="Cover of <%= book.title %> by <%= book.author %>"
+        loading="lazy"
+      />
+      <p class="title"><%= book.title %></p>
+      <p class="genre"><%= book.genre %></p>
+      <p class="author"><%= book.author %></p>
+      <p class="stock-status">
+        <% if (book.quantity > 0) { %>
+        <span class="in-stock">In Stock</span>
+        <% } else { %>
+        <span class="out-of-stock">Out of Stock</span>
+        <% } %>
+      </p>
+      <div class="card-row">
+        <p class="book-price">₹<%= book.price.toFixed(2) %></p>
+
+        <% if (book.quantity > 0) { %>
+        <button class="add-to-bucket" data-id="<%= book._id %>">
+          Add to Basket
+        </button>
+        <% } else { %>
+        <h5>Out of Stock</h5>
+        <% } %>
+      </div>
+    </div>
+    <% }) %> <% } %>
+  </div>
+</div>
