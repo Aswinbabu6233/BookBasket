@@ -1,5 +1,4 @@
 var express = require("express");
-const { body, validationResult } = require("express-validator");
 const User = require("../models/usermodel");
 var router = express.Router();
 const bcrypt = require("bcrypt");
@@ -86,7 +85,7 @@ router.post(
       const user = await User.findOne({ email: emaillower, role: "user" });
       if (!user) {
         return res.render("common/login", {
-          errors: [{ msg: "User not Found Invalid Emai" }],
+          errors: [{ msg: "User not Found Invalid Email" }],
         });
       }
       const isMatch = await bcrypt.compare(password, user.password);
